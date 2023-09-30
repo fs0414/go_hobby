@@ -1,0 +1,28 @@
+version: "3"
+services:
+  app:
+    container_name: go_container
+    build:
+      context: ./
+    ports:
+      - 8080:8080
+    tty: true
+    volumes:
+      - ./:/go/src/
+
+  db:
+    container_name: go_db_container
+    image: mysql:8.0
+    ports:
+      - 3306:3306
+    volumes:
+      - go-db-volume:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE} 
+volumes:
+  go-db-volume:
+
