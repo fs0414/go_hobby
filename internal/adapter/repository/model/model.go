@@ -1,0 +1,27 @@
+package model
+
+import (
+	"gorm.io/gorm"
+)
+
+type UserRole string
+
+const (
+    RoleAdmin = "admin"
+    RoleUser  = "user"
+)
+
+type User struct {
+	gorm.Model
+	Name string `gorm:"size:255"`
+	Email string `gorm:"type:varchar(100);unique_index"`
+	Password string `gorm:"size:255"`
+    Role UserRole `gorm:"type:varchar(20)"`
+	Boards []Board `gorm:"foreignKey:UserID"`
+}
+
+type Board struct {
+	gorm.Model
+	Content string `gorm:"size:255"`
+	UserID uint
+}

@@ -1,13 +1,16 @@
 package main
 
 import (
-  "github.com/soramar/go_hobby/model"
-  "github.com/soramar/go_hobby/router"
+  // "fmt"
+
+  "github.com/fs0414/go_hobby/internal/infrastructure/database"
+  // "github.com/fs0414/go_hobby/internal/model"
+  "github.com/fs0414/go_hobby/internal/adapter/api/router"
 )
 
-func main() {
-  model.DbInit()
 
+func main() {
+  database.DbInit()
   router := router.GetRouter()
   router.Run(":8080")
 }
