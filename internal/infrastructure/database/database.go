@@ -1,19 +1,21 @@
 package database
+// db "github.com/fs0414/go_hobby/internal/infrastructure/database"
 
 import (
-  "github.com/joho/godotenv"
-  "gorm.io/gorm"
-  "gorm.io/driver/postgres"
   "os"
   "fmt"
 
-  // "github.com/fs0414/go_hobby/internal/repository/model"
-  "github.com/fs0414/go_hobby/internal/adapter/repository/model"
+  "github.com/joho/godotenv"
+  "gorm.io/gorm"
+  "gorm.io/driver/postgres"
+
+  "github.com/fs0414/go_hobby/internal/infrastructure/model"
 )
+
+var Db *gorm.DB
 
 func DbInit() {
   loadEnv()
-  fmt.Println("tatatatatttaata")
   
   dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
     os.Getenv("POSTGRES_HOST"),
@@ -25,14 +27,14 @@ func DbInit() {
     os.Getenv("POSTGRES_TIMEZONE"),
   )
 
-  database, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+  var err error
+  Db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
   if err != nil {
       panic("failed to connect to database")
   }
 
-    
-  database.AutoMigrate(&model.User{}, &model.Board{})
+  Db.AutoMigrate(&model.User{}, &model.Board{})
 }
 
 func loadEnv() {

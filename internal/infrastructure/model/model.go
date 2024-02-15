@@ -1,4 +1,5 @@
 package model
+// "github.com/fs0414/go_hobby/internal/infrastructure/model"
 
 import (
 	"gorm.io/gorm"
