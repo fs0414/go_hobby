@@ -1,14 +1,13 @@
 package repository
 
 import (
-	"github.com/fs0414/go_hobby/internal/adapter/repository/interface"
 	"github.com/fs0414/go_hobby/internal/infrastructure/database"
 	"github.com/fs0414/go_hobby/internal/infrastructure/model"
 )
 
 type BoardRepository struct {}
 
-func BoardRepositoryFactory() repository_interface.BoardRepositoryIf {
+func BoardRepositoryFactory() BoardRepositoryImpl {
     return &BoardRepository{}
 }
 

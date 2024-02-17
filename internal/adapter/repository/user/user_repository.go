@@ -2,14 +2,15 @@ package repository
 // "github.com/fs0414/go_hobby/internal/adapter/repository"
 
 import (
-	"github.com/fs0414/go_hobby/internal/adapter/repository/interface"
+	// "github.com/fs0414/go_hobby/internal/adapter/repository/interface"
+	// "github.com/fs0414/go_hobby/internal/adapter/repository/user"
 	"github.com/fs0414/go_hobby/internal/infrastructure/database"
 	"github.com/fs0414/go_hobby/internal/infrastructure/model"
 )
 
 type UserRepository struct {}
 
-func UserRepositoryFactory() repository_interface.UserRepositoryIf {
+func UserRepositoryFactory() UserRepositoryImpl {
 	return &UserRepository{}
 }
 

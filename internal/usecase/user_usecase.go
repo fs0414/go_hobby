@@ -6,15 +6,15 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/fs0414/go_hobby/internal/adapter/repository/interface"
+	"github.com/fs0414/go_hobby/internal/adapter/repository/user"
 	"github.com/fs0414/go_hobby/internal/infrastructure/model"
 )
 
 type UserUseCase struct {
-	repo repository_interface.UserRepositoryIf
+	repo repository.UserRepositoryImpl
 }
 
-func UserUseCaseFactory(repo repository_interface.UserRepositoryIf) *UserUseCase {
+func UserUseCaseFactory(repo repository.UserRepositoryImpl) *UserUseCase {
 	return &UserUseCase{repo: repo}
 }
 

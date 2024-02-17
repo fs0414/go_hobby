@@ -3,20 +3,20 @@ package usecase
 import (
 	"github.com/gin-gonic/gin"
 
-	"github.com/fs0414/go_hobby/internal/adapter/repository/interface"
+	"github.com/fs0414/go_hobby/internal/adapter/repository/board"
 	"github.com/fs0414/go_hobby/internal/infrastructure/model"
 )
 
 type BoardUseCase struct {
-	repo repository_interface.BoardRepositoryIf
+	repo repository.BoardRepositoryImpl
 }
 
 type BoardCreateRequest struct {
-	Content string `json:"content"`
+	Content string `json:"title" binding:"required,min=1,max=255"`
 	UserID uint `json:"user_id"`
 }
 
-func BoardUseCaseFactory(repo repository_interface.BoardRepositoryIf) *BoardUseCase {
+func BoardUseCaseFactory(repo repository.BoardRepositoryImpl) *BoardUseCase {
 	return &BoardUseCase{repo: repo}
 }
 
