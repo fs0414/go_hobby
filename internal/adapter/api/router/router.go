@@ -17,10 +17,16 @@ func GetRouter() *gin.Engine {
   userRepo := repository.UserRepositoryFactory()
   userUseCase := usecase.UserUseCaseFactory(userRepo)
 
+  boardRepo := repository.BoardRepositoryFactory()
+  boardUseCase := usecase.BoardUseCaseFactory(boardRepo)
+
   apiRouter := r.Group("/api")
   {
     apiRouter.GET("/users", userUseCase.FetchUsers)
-    // apiRouter.GET("/users",usecase.FetchUsers)
+    apiRouter.POST("/users", userUseCase.CreateUser)
+    
+    apiRouter.GET("/boards", boardUseCase.FetchBoards)
+    apiRouter.POST("/boards", boardUseCase.CreateBoard)
   }
 
   return r

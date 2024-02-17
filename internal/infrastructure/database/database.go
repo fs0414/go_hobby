@@ -12,11 +12,11 @@ import (
   "github.com/fs0414/go_hobby/internal/infrastructure/model"
 )
 
-var Db *gorm.DB
+var db *gorm.DB
 
 func DbInit() {
   loadEnv()
-  
+
   dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
     os.Getenv("POSTGRES_HOST"),
     os.Getenv("POSTGRES_USER"),
@@ -28,13 +28,13 @@ func DbInit() {
   )
 
   var err error
-  Db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
+  db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{})
 
   if err != nil {
       panic("failed to connect to database")
   }
 
-  Db.AutoMigrate(&model.User{}, &model.Board{})
+  db.AutoMigrate(&model.User{}, &model.Board{})
 }
 
 func loadEnv() {
@@ -43,4 +43,8 @@ func loadEnv() {
 	if err != nil {
 		fmt.Printf("not loaded env: %v", err)
 	}
+}
+
+func GetDb() *gorm.DB {
+  return db
 }
