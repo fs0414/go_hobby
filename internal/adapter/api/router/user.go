@@ -11,5 +11,6 @@ func SetUserRoutes(rg *gin.RouterGroup) {
 	uc := usecase.UserUseCaseFactory(repository.UserRepositoryFactory())
 
 	rg.GET("/users", uc.FetchUsers)
-	rg.POST("/users", uc.CreateUser)
+	rg.POST("/signup", uc.SignUp)
+	rg.POST("/signin", uc.SignIn)
 }

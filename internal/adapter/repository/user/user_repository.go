@@ -2,8 +2,6 @@ package repository
 // "github.com/fs0414/go_hobby/internal/adapter/repository"
 
 import (
-	// "github.com/fs0414/go_hobby/internal/adapter/repository/interface"
-	// "github.com/fs0414/go_hobby/internal/adapter/repository/user"
 	"github.com/fs0414/go_hobby/internal/infrastructure/database"
 	"github.com/fs0414/go_hobby/internal/infrastructure/model"
 )
@@ -33,4 +31,15 @@ func (repo *UserRepository) CreateUser(user model.User) (model.User, error) {
 	}
 
 	return user, nil
+}
+
+func (repo *UserRepository) FindByCredentials(email string) (model.User, error) {
+	db := database.GetDb()
+    var user model.User
+    
+	if err := db.Where("email =?", email).First(&user).Error; err != nil {
+		return model.User{}, err
+    }
+	
+    return user, nil
 }

@@ -12,7 +12,7 @@ type BoardUseCase struct {
 }
 
 type BoardCreateRequest struct {
-	Content string `json:"title" binding:"required,min=1,max=255"`
+	Content string `json:"content" binding:"required,min=1,max=255"`
 	UserID uint `json:"user_id"`
 }
 
@@ -31,14 +31,17 @@ func (uc *BoardUseCase) FetchBoards(c *gin.Context) {
 
 func (uc *BoardUseCase) CreateBoard(c *gin.Context) {
 	var req BoardCreateRequest
+
 	if err := c.ShouldBindJSON(&req); err != nil {
         c.JSON(400, gin.H{"error": err.Error()})
         return
     }
+
 	board := model.Board{
         Content: req.Content,
         UserID: req.UserID,
     }
+	
 	newBoard, err := uc.repo.CreateBoard(board)
 
 	if err != nil {

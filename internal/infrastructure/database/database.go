@@ -15,7 +15,7 @@ import (
 var db *gorm.DB
 
 func DbInit() {
-  loadEnv()
+  LoadEnv()
 
   dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=%s",
     os.Getenv("POSTGRES_HOST"),
@@ -37,7 +37,7 @@ func DbInit() {
   db.AutoMigrate(&model.User{}, &model.Board{})
 }
 
-func loadEnv() {
+func LoadEnv() {
 	err := godotenv.Load(".env")
 	
 	if err != nil {

@@ -7,4 +7,5 @@ import (
 type UserRepositoryImpl interface {
 	GetUsers() ([]model.User, error)
 	CreateUser(user model.User) (model.User, error)
+	FindByCredentials(email string) (model.User, error)
 }
