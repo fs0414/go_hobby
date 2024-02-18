@@ -1,6 +1,10 @@
 package usecase
 
 import (
+	// "fmt"
+	// "reflect"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 
 	"github.com/fs0414/go_hobby/internal/adapter/repository/board"
@@ -41,7 +45,7 @@ func (uc *BoardUseCase) CreateBoard(c *gin.Context) {
         Content: req.Content,
         UserID: req.UserID,
     }
-	
+
 	newBoard, err := uc.repo.CreateBoard(board)
 
 	if err != nil {
@@ -50,4 +54,21 @@ func (uc *BoardUseCase) CreateBoard(c *gin.Context) {
     }
 
 	c.JSON(201, newBoard)
+}
+
+func (uc *BoardUseCase)DeleteBoard(c *gin.Context) {
+	boardId := c.Param("id")
+	boardIdUint, err := strconv.Atoi(boardId)
+	
+	if err!= nil {
+        c.JSON(400, gin.H{"error": err.Error()})
+        return
+    }
+	
+	if err := uc.repo.DeleteBoard(boardIdUint); err!= nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+        return
+	}
+
+	c.Status(204)
 }

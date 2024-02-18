@@ -7,4 +7,5 @@ import (
 type BoardRepositoryImpl interface {
 	GetBoards() ([]model.Board, error)
 	CreateBoard(board model.Board) (model.Board, error)
+	DeleteBoard(boardIdInt int) error
 }

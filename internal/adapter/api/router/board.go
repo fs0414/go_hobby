@@ -12,4 +12,5 @@ func SetBoardRoutes(rg *gin.RouterGroup) {
 
 	rg.GET("/boards", boardUseCase.FetchBoards)
 	rg.POST("/boards", boardUseCase.CreateBoard)
+	rg.DELETE("/boards/:id", boardUseCase.DeleteBoard)
 }

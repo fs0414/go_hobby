@@ -32,3 +32,13 @@ func (repo *BoardRepository) CreateBoard(board model.Board) (model.Board, error)
 
 	return board, nil
 }
+
+func (repo *BoardRepository) DeleteBoard(boardIdInt int) error {
+	db := database.GetDb()
+    result := db.Delete(&model.Board{}, boardIdInt)
+    if result.Error!= nil {
+        return result.Error
+    }
+
+    return nil
+}

@@ -5,7 +5,6 @@ import (
 	"github.com/gin-gonic/gin"
 
 	"github.com/fs0414/go_hobby/internal/adapter/repository/user"
-	// "github.com/fs0414/go_hobby/internal/infrastructure/database"
 	"github.com/fs0414/go_hobby/internal/infrastructure/model"
 	"github.com/fs0414/go_hobby/internal/service/user"
 )
