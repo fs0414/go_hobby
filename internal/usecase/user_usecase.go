@@ -2,7 +2,6 @@ package usecase
 // "github.com/fs0414/go_hobby/internal/usecase"
 
 import (
-	"fmt"
 	"time"
 	"os"
 
@@ -73,10 +72,7 @@ func (uc *UserUseCase) SignIn(c *gin.Context) {
 
     token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	fmt.Println(token)
-
-	database.LoadEnv()
-	secretKey := os.Getenv("JWT_SECRET_KEY")
+	secretKey := locadEnvByJwtSecretKey()
 
     tokenString, err := token.SignedString([]byte(secretKey))
 
@@ -86,4 +82,10 @@ func (uc *UserUseCase) SignIn(c *gin.Context) {
     }
 
 	c.JSON(200, tokenString)
+}
+
+func locadEnvByJwtSecretKey() string {
+	database.LoadEnv()
+	secretKey := os.Getenv("JWT_SECRET_KEY")
+	return secretKey
 }
